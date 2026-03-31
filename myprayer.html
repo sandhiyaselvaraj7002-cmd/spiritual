@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Sanctuary - Full Prayer Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #fce4ec 100%);
+            color: #5d4037;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh;
+        }
+        .container { width: 92%; max-width: 450px; text-align: center; padding: 20px; }
+        
+        h2 { color: #d81b60; margin-top: 20px; letter-spacing: 1px; }
+
+        /* Audio Box */
+        .audio-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px; border-radius: 25px;
+            margin: 15px 0; width: 100%; box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(236, 64, 122, 0.1);
+        }
+        audio { width: 100%; height: 35px; margin-top: 8px; }
+
+        /* Prayer Display Card */
+        .prompt-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
+            padding: 25px; border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(236, 64, 122, 0.15);
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            min-height: 200px;
+            text-align: left; /* வாசிக்க வசதியாக இடது பக்கம் அலைன்மென்ட் */
+            transition: all 0.5s ease;
+        }
+
+        .category-label {
+            font-size: 0.9rem; font-weight: bold; color: #ad1457;
+            text-transform: uppercase; margin-bottom: 15px; letter-spacing: 2px;
+            text-align: center; border-bottom: 1px solid #f8bbd0; padding-bottom: 5px;
+        }
+
+        .prayer-list {
+            list-style-type: none; padding: 0; margin: 0;
+        }
+        .prayer-item {
+            font-size: 1.05rem; line-height: 1.6; font-style: italic;
+            color: #4e342e; margin-bottom: 15px;
+            position: relative; padding-left: 25px;
+        }
+        .prayer-item::before {
+            content: "✨"; position: absolute; left: 0; font-size: 0.9rem;
+        }
+
+        /* Grid for Categories */
+        .btn-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; width: 100%; 
+            max-height: 300px; overflow-y: auto; 
+            padding: 10px; scrollbar-width: none; 
+        }
+        .btn-grid::-webkit-scrollbar { display: none; } 
+        
+        button {
+            background: white; color: #d81b60; border: 1px solid #f8bbd0;
+            padding: 14px 5px; border-radius: 18px; font-weight: bold; cursor: pointer;
+            font-family: 'Lora', serif; font-size: 0.85rem; transition: 0.3s;
+        }
+        button:active { background: #fce4ec; transform: scale(0.95); }
+        .btn-special { background: #fce4ec; border: 1px solid #d81b60; }
+
+        .back-btn {
+            background: #5d4037; color: white; border: none;
+            padding: 15px 40px; border-radius: 20px; text-decoration: none;
+            display: inline-block; margin: 25px 0; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>விண்ணப்பங்களின் வாசல் 🙏</h2>
+
+        <div class="audio-box">
+            <span style="font-weight: bold; color: #ad1457; font-size: 0.85rem;">🎧 ஆடியோ ஜெபம் (Listen)</span>
+            <audio controls>
+                <source src="one_minute_prayer.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="prompt-card" id="main-card">
+            <div id="category-display" class="category-label">தேவன் உம்மோடு பேசுகிறார்</div>
+            <div id="prayer-content">
+                <p style="text-align: center; font-style: italic; color: #8d6e63;">கீழே உள்ள தலைப்பைத் தேர்ந்தெடுத்தால் முழு ஜெபமும் இங்கே தோன்றும்...</p>
+            </div>
+        </div>
+
+        <div class="btn-grid">
+            <button onclick="displayFullPrayer('illness')" class="btn-special">🏥 வியாதிகள்</button>
+            <button onclick="displayFullPrayer('partner')" class="btn-special">💍 துணைவர்</button>
+            <button onclick="displayFullPrayer('family')">👨‍👩‍👧‍👦 குடும்பம்</button>
+            <button onclick="displayFullPrayer('love')">💖 அன்பு (Love)</button>
+            <button onclick="getMoodVerse('studies')">📚 படிப்பு</button>
+            <button onclick="displayFullPrayer('work')">💼 வேலை</button>
+            <button onclick="displayFullPrayer('business')">📈 தொழில்</button>
+            <button onclick="displayFullPrayer('confidence')">🦁 தன்னம்பிக்கை</button>
+            <button onclick="displayFullPrayer('aloneness')">🕯️ தனிமை</button>
+            <button onclick="displayFullPrayer('lovedones')">✨ உறவினர்கள்</button>
+            <button onclick="displayFullPrayer('newfriends')">🤝 நண்பர்கள்</button>
+            <button onclick="displayFullPrayer('peace')">😌 மன அமைதி</button>
+            <button onclick="displayFullPrayer('faceworld')">🌍 உலகை எதிர்கொள்ள</button>
+        </div>
+
+        <a href="index.html" class="back-btn">← Home</a>
+    </div>
+
+    <script>
+        const prayers = {
+            illness: ["உம்முடைய காயங்களால் எங்களுக்குக் குணமுண்டானது; நோயினால் வாடும் மக்களை நீர் சுகப்படுத்தும்.", "மருத்துவமனையில் மரணப் போராட்டத்தோடு இருப்பவர்களுக்கு நீர் மறுவாழ்வைத் தந்தருளும்.", "தீராத வியாதிகள் நீங்கி, பூரண ஆரோக்கியத்தோடு அவர்கள் எழுந்து நடக்க கிருபை செய்யும்.", "நோயாளிகளைப் பராமரிக்கும் குடும்பத்தாருக்கு மனதிடத்தையும், பொறுமையையும் தாரும்.", "அற்புதமான சுகத்தை அருளி, உமது நாமத்தை அவர்கள் மகிமைப்படுத்த உதவி செய்யும்."],
+            partner: ["என் வாழ்க்கைத்துணையின் உடல் நலம் மற்றும் உள்ளத்தின் அமைதிக்காக ஜெபிக்கிறேன்.", "எங்களிடையே எழும் கருத்து வேறுபாடுகள் நீங்கி, தெய்வீக அன்பு எங்களை வழிநடத்தட்டும்.", "அவருடைய பணிகளில் கர்த்தருடைய ஆசீர்வாதம் தங்கி, எல்லா நன்மைகளையும் பெருகச் செய்யட்டும்.", "எங்கள் திருமண வாழ்வை ஒரு நந்தவனமாக மாற்றி, ஒருவருக்கொருவர் பக்கபலமாக இருக்கச் செய்யும்.", "அவருடைய இதயத்தின் ஏக்கங்களை நீர் அறிந்து, உமது சித்தத்தின்படி நிறைவேற்றுவீராக."],
+            love: ["உலகத்தின் சுயநலமான அன்பை விட, உம்முடைய தூய்மையான அன்பினால் என் இதயத்தை நிரப்பும்.", "மற்றவர்களிடம் கோபப்படாமல், மன்னிக்கும் குணத்தை எனக்குத் தாரும்.", "உடைந்த உறவுகள் மீண்டும் அன்பால் இணையவும், கசப்புகள் மாறவும் வழி செய்யும்.", "அன்பே பிரதானம் என்பதை நான் உணர்ந்து, பிறரை நேசிக்க எனக்குக் கற்றுக்கொடும்.", "யாருமற்றவர்களுக்கு அன்பைக் காட்டும் ஒரு கருவியாக என்னை மாற்றும்."],
+            family: ["என் இல்லத்தில் உம்முடைய சமாதானம் தங்கியிருக்கட்டும்; சண்டைகள் விலகி ஒற்றுமை பெருகட்டும்.", "பெற்றோர்களின் தேவைகளைச் சந்தித்து, அவர்களுக்கு மகிழ்ச்சியான முதிர்வயதைத் தாரும்.", "என் பிள்ளைகளைத் தீய வழிகளிலிருந்து பாதுகாத்து, உமது வழியில் வளரச் செய்யும்.", "எங்கள் குடும்பத்தின் ஒவ்வொரு முடிவும் உம்முடைய ஆலோசனையின்படி அமையட்டும்.", "இழப்புகளால் வாடும் குடும்பங்களுக்கு நீர் ஒரு ஆறுதலின் தெய்வமாக இரும்."],
+            studies: ["படிக்கும் பாடங்களை எளிதில் புரிந்து கொள்ளும் ஞானத்தையும், ஞாபக சக்தியையும் தாரும்.", "தேர்வு நேரங்களில் வரும் தேவையற்ற பயத்தை நீக்கி, தெளிவான சிந்தனையைத் தாரும்.", "எதிர்காலக் கல்விக்கான தடைகள் அனைத்தும் நீங்கி, உயர்கல்வி பெற வழி செய்யும்.", "கல்வியில் நான் அடையும் வெற்றி உம்முடைய நாமத்திற்குப் புகழைத் தேடித்தரட்டும்.", "நேரத்தைச் சரியாகப் பயன்படுத்தவும், சோம்பேறித்தனத்தை நீக்கவும் உதவி செய்யும்."],
+            work: ["என் வேலையில் நான் செய்யும் ஒவ்வொரு காரியமும் நேர்த்தியாக அமைய ஆசீர்வதியும்.", "பணியிடத்தில் எனக்கு விரோதமாக எழும் சூழ்ச்சிகளிலிருந்து என்னைப் பாதுகாத்துக் கொள்ளும்.", "உழைப்புக்கு ஏற்ற பலனைத் தந்து, என் பொருளாதாரத் தேவைகளைச் சந்திப்பீராக.", "வேலைப்பளுவினால் வரும் சோர்வை நீக்கி, உற்சாகத்தோடு உழைக்க பெலன் தாரும்.", "என் மூலமாக என் அலுவலகத்திற்கு நன்மைகளும் வளர்ச்சியும் உண்டாகச் செய்யும்."],
+            business: ["நேர்மையான முறையில் என் தொழில் வளர்ந்து, பலருக்கு ஆசீர்வாதமாக அமையட்டும்.", "சரியான முதலீடுகளையும், வியாபாரத் தொடர்புகளையும் எனக்குக் கட்டளையிடும்.", "தொழிலில் ஏற்படும் நஷ்டங்கள் மற்றும் கடன்களிலிருந்து என்னை விடுதலையாக்கும்.", "வாடிக்கையாளர்களின் நம்பிக்கையைத் தக்கவைத்துக் கொள்ள எனக்கு ஞானம் தாரும்.", "லாபத்தில் ஒரு பகுதியை உம்முடைய பணிக்காகக் கொடுக்க எனக்கு மனதைத் தாரும்."],
+            confidence: ["நான் யாரையும் கண்டு அஞ்சாமல், உம்முடைய பெலத்தோடு உலகை எதிர்கொள்ளச் செய்யும்.", "என்னால் முடியும் என்ற நம்பிக்கையைத் தந்து, என் தாழ்வு மனப்பான்மையை அகற்றும்.", "பெரிய காரியங்களைச் சாதிக்க எனக்குத் தேவையான மனத்திடத்தைத் தந்தருளும்.", "நீர் என்னோடு இருப்பதால் நான் ஒருபோதும் தோற்றுப் போவதில்லை என்பதை உணரச் செய்யும்.", "விமர்சனங்களைக் கண்டு அஞ்சாமல், என் பாதையில் உறுதியோடு நடக்கச் செய்யும்."],
+            aloneness: ["தனிமையின் வேதனையை நீக்கி, நீர் என் நண்பராக என்னோடு இருப்பதை உணரச் செய்யும்.", "இந்த அமைதியான நேரத்தை உம்மிடம் நெருங்கி வர ஒரு வாய்ப்பாக மாற்ற உதவி செய்யும்.", "யாருமற்றவர்களுக்கு நீரே உறவாக இருந்து, மன வேதனையை ஆற்றித் தேற்றும்.", "தனிமை என்னைக் காயப்படுத்தாமல், அது என் ஆத்துமாவை ஆற்றித் தேற்றட்டும்.", "உலகம் என்னைப் புறக்கணித்தாலும், நீர் என்னை ஏற்றுக் கொள்கிறீர் என்ற நிம்மதியைத் தாரும்."],
+            lovedones: ["என் உற்றார் உறவினர்கள் அனைவரையும் ஆசீர்வதித்து, பாதுகாத்துக் கொள்ளும்.", "அவர்களுடைய வாழ்வில் உள்ள போராட்டங்கள் நீங்கி, வெற்றி பெறச் செய்யும்.", "உறவுகளிடையே உள்ள கசப்புகள் நீங்கி, மீண்டும் ஒருவரை ஒருவர் நேசிக்க உதவி செய்யும்.", "அவர்களுடைய ஆவிக்குரிய வாழ்வு மேன்மையடைய நீர் கிருபை செய்யும்.", "எங்கள் உறவுகள் அனைத்தும் உம்முடைய அன்பினால் பிணைக்கப்படட்டும்."],
+            newfriends: ["நல்ல பண்புள்ள நண்பர்களை எனக்குக் கட்டளையிட்டு, என் வாழ்வை ஆசீர்வதியும்.", "தீய வழிகளில் என்னைத் தூண்டும் நட்பிலிருந்து என்னைப் பாதுகாத்துக் கொள்ளும்.", "மற்றவர்களோடு அன்பாகப் பழகும் குணத்தையும், நாவையும் எனக்குத் தந்தருளும்.", "ஆவிக்குரிய வளர்ச்சியில் என்னோடு துணை நிற்கும் நண்பர்களைத் தாரும்.", "நல்ல நட்பு என் வாழ்வைச் செம்மைப்படுத்த நீர் உதவி செய்யும்."],
+            peace: ["குழப்பமான என் உள்ளத்தில் உமது பரலோக சமாதானத்தை ஊற்றும்.", "எல்லா புத்திக்கும் மேலான தேவ சமாதானம் என் இதயத்தைக் காத்துக் கொள்ளட்டும்.", "நிம்மதியான உறக்கத்தையும், பயமற்ற ஒரு நாளைத் தந்து ஆசீர்வதியும்.", "கவலைகளுக்கு இடம் கொடாமல், எப்போதும் உம்மைத் துதிக்க உதவி செய்யும்.", "என் இல்லத்திலும், உள்ளத்திலும் என்றும் உமது அமைதி நிலைத்திருக்கட்டும்."],
+            faceworld: ["உலகில் உள்ள அநீதிகளையும், ஏமாற்றங்களையும் கண்டு நான் கலங்காமல் இருக்கச் செய்யும்.", "எதிர்ப்புகள் வரும்போது அமைதியாகவும், ஞானமாகவும் அவற்றைக் கையாள கற்றுக்கொடும்.", "மற்றவர்களின் விமர்சனங்களுக்குப் பயப்படாமல், உண்மையை தைரியமாகப் பேச உதவி செய்யும்.", "இந்த உலகத்தின் மாயைகளில் சிக்காமல், நித்தியமான காரியங்களில் என் மனதை வைக்கச் செய்யும்.", "ஒரு சாட்சியாக இந்த உலகத்தில் வாழ எனக்கு உம்முடைய கிருபையைத் தாரும்."]
+        };
+
+        function displayFullPrayer(cat) {
+            const list = prayers[cat];
+            const contentDiv = document.getElementById('prayer-content');
+            const label = document.getElementById('category-display');
+            const titles = {
+                illness: "வியாதிகளுக்காக", partner: "வாழ்க்கைத்துணைக்காக", love: "அன்பிற்காக",
+                family: "குடும்பத்திற்காக", studies: "படிப்பிற்காக", work: "வேலைக்காக",
+                business: "தொழிலுக்காக", confidence: "தன்னம்பிக்கைக்காக", aloneness: "தனிமைக்காக",
+                lovedones: "உறவுகளுக்காக", newfriends: "நட்பிற்காக", peace: "அமைதிக்காக", faceworld: "உலகிற்காக"
+            };
+
+            label.innerText = titles[cat];
+            
+            // முழு ஜெபத்தையும் பட்டியலாக உருவாக்குதல்
+            let html = '<ul class="prayer-list">';
+            list.forEach(p => {
+                html += `<li class="prayer-item">${p}</li>`;
+            });
+            html += '</ul>';
+
+            contentDiv.innerHTML = html;
+            
+            // கார்டை மேலே கொண்டு வருதல் (Scroll into view smoothly)
+            document.getElementById('main-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>

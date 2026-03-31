@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Prayers</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #fff0f3; 
+            padding: 20px; 
+            color: #5d4037;
+        }
+
+        /* Promise Banner Style */
+        .promise-banner {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #f8bbd0;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(236, 64, 122, 0.1);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .promise-text {
+            color: #ad1457;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+            display: block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Prayer Card Style */
+        .prayer-card { 
+            background: white; 
+            padding: 18px; 
+            border-radius: 15px; 
+            margin-bottom: 15px; 
+            border-left: 6px solid #ec407a; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .time { 
+            font-size: 0.75rem; 
+            color: #ad1457; 
+            font-weight: bold; 
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        p { margin: 5px 0; line-height: 1.5; }
+
+        .back-btn { 
+            background: #ec407a; 
+            color: white; 
+            padding: 12px 25px; 
+            text-decoration: none; 
+            border-radius: 12px; 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h2 { color: #ad1457; margin-bottom: 20px; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← Home</a>
+
+    <div class="promise-banner">
+        <span style="font-size: 1.5rem; display: block; margin-bottom: 5px;">✨</span>
+        <span class="promise-text">உமது ஜெபத்திற்கு விரைவில் பதில் தருவார்</span>
+    </div>
+
+    <h2>Saved Prayers 📖</h2>
+    
+    <div id="prayers-list"></div>
+
+    <script>
+        const listDiv = document.getElementById('prayers-list');
+        // 'myPrayers' இலிருந்து டேட்டாவை எடுத்தல்
+        const prayers = JSON.parse(localStorage.getItem('myPrayers')) || [];
+
+        if(prayers.length === 0) {
+            listDiv.innerHTML = `
+                <div style="text-align: center; margin-top: 50px; color: #8d6e63;">
+                    <p style="font-size: 3rem;">📝</p>
+                    <p>இன்னும் ஜெபங்கள் சேமிக்கப்படவில்லை.</p>
+                </div>`;
+        } else {
+            // சமீபத்திய ஜெபங்கள் முதலில் வர 'reverse' செய்தல்
+            prayers.reverse().forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'prayer-card';
+                div.innerHTML = `
+                    <span class="time">📅 ${p.time}</span>
+                    <p>${p.note}</p>
+                `;
+                listDiv.appendChild(div);
+            });
+        }
+    </script>
+
+</body>
+</html>
