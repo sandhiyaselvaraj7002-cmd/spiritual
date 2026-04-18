@@ -1,4 +1,4 @@
-const CACHE_NAME = "sanctuary-v3";
+const CACHE_NAME = "sanctuary-v5";
 
 // ✅ Only important lightweight files (safe cache)
 const STATIC_ASSETS = [
