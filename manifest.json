@@ -1,0 +1,16 @@
+{
+  "name": "My Digital Sanctuary",
+  "short_name": "Sanctuary",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fff0f3",
+  "theme_color": "#ec407a",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
